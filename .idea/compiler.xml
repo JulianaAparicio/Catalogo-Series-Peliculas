@@ -7,13 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-catalog" />
-        <module name="eurekaServer" />
         <module name="api-movie" />
+        <module name="eurekaServer" />
+        <module name="configServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-catalog" target="17" />
       <module name="api-movie" target="17" />
+      <module name="configServer" target="17" />
       <module name="eurekaServer" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-catalog" options="-parameters" />
       <module name="api-movie" options="-parameters" />
+      <module name="configServer" options="-parameters" />
       <module name="eurekaServer" options="-parameters" />
     </option>
   </component>

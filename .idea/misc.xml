@@ -6,6 +6,9 @@
         <option value="$PROJECT_DIR$/api-movie/pom.xml" />
         <option value="$PROJECT_DIR$/api-catalog/pom.xml" />
         <option value="$PROJECT_DIR$/eurekaServer/pom.xml" />
+        <option value="$PROJECT_DIR$/catalog-service/pom.xml" />
+        <option value="$PROJECT_DIR$/configServer/pom.xml" />
+        <option value="$PROJECT_DIR$/movie-service/pom.xml" />
       </list>
     </option>
   </component>

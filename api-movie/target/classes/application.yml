@@ -13,9 +13,14 @@ spring:
     password: pwd-movie
 
   jpa:
-    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: true
+    hibernate:
+      ddl-auto: update
     generate-ddl: true
-    show-sql: true
+
 
   eureka:
     instance:
