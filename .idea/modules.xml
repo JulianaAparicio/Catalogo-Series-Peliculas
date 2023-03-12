@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/configServer/configServer.iml" filepath="$PROJECT_DIR$/configServer/configServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/eurekaServer/eurekaServer.iml" filepath="$PROJECT_DIR$/eurekaServer/eurekaServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/examen-especializacion-backend.iml" filepath="$PROJECT_DIR$/.idea/examen-especializacion-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
     </modules>
   </component>
 </project>
