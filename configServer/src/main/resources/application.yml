@@ -8,6 +8,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/JulianaAparicio/config-server-examen.git
+          uri: https://github.com/JulianaAparicio/config-server-examen
           force-pull: true
-          search-paths: configServer
