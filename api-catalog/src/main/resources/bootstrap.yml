@@ -5,6 +5,9 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8888/
+  mongodb:
+    embedded:
+      version: 4.0.2
   data:
     mongodb:
       database: test
