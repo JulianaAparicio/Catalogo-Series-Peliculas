@@ -21,7 +21,7 @@ public interface SerieServiceClient {
 	@Getter
 	@Setter
 	class SerieDto{
-		private Long id;
+		private String id;
 
 		private String name;
 
