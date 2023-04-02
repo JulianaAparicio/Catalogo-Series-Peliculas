@@ -5,3 +5,7 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8888/
+  data:
+    mongodb:
+      database: test
+      port: 27017
