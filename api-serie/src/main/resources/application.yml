@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: api-serie
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888/
   mongodb:
     embedded:
       version: 4.0.2
@@ -6,9 +12,3 @@ spring:
     mongodb:
       database: test
       port: 27017
-  application:
-    name: api-serie
-  cloud:
-    config:
-      enabled: true
-      uri: http://localhost:8888/
