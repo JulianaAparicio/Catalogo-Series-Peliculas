@@ -15,9 +15,6 @@ import java.util.List;
 @RequestMapping("/api/v1/catalog")
 public class CatalogController {
 
-	//TODO:
-	// Acomodar para que devuelve al buscar por género series y peliculas (2 ENDPOINTS HAY QUE HACER).
-
 	private final MovieServiceClient movieServiceClient;
 	private final SerieServiceClient serieServiceClient;
 
