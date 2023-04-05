@@ -22,11 +22,8 @@ public interface MovieServiceClient {
 	@Setter
 	class MovieDto{
 		private Long id;
-
 		private String name;
-
 		private String genre;
-
 		private String urlStream;
 	}
 
