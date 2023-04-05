@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfiguration {
     public static final String EXCHANGE_NAME = "backendExchange";
-    public static final String TOPIC_CURSO_FINALIZADO = "com.dh.backend.cursofinalizado";
-    public static final String QUEUE_CURSO_FINALIZADO ="queueCursoFinalizado";
+    public static final String TOPIC_NEW_MOVIE = "com.dh.backend.newMovie";
+    public static final String QUEUE_NEW_MOVIE ="queueNewMovie";
 
     @Bean
     public TopicExchange appExchange() {
@@ -22,13 +22,13 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
-    public Queue queueCursoFinalizado(){
-        return new Queue(QUEUE_CURSO_FINALIZADO);
+    public Queue queueNewMovie(){
+        return new Queue(QUEUE_NEW_MOVIE);
     }
 
     @Bean
     public Binding declareBindingSpecific(){
-        return BindingBuilder.bind(queueCursoFinalizado()).to(appExchange()).with(TOPIC_CURSO_FINALIZADO);
+        return BindingBuilder.bind(queueNewMovie()).to(appExchange()).with(TOPIC_NEW_MOVIE);
     }
 
 
