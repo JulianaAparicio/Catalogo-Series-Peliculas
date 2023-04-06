@@ -1,4 +1,4 @@
-package com.dh.movie.config;
+package com.dh.serie.config;
 
 
 import org.springframework.amqp.core.TopicExchange;
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfiguration {
 
-    public static final String EXCHANGE_NAME = "movieExchange";
-    public static final String TOPIC_NEW_MOVIE = "com.dh.movie.newMovie";
+    public static final String EXCHANGE_NAME = "backendExchange";
+    public static final String TOPIC_NEW_SERIE = "com.dh.backend.newSerie";
 
     @Bean
     public TopicExchange appExchange() {
