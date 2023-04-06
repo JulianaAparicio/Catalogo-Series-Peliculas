@@ -25,7 +25,8 @@ public class MovieService {
     }
 
     public Movie save(Movie movie) {
-        newMovieEventProducer.publishNewMovieEvent(new NewMovieEventProducer.Data(movie.getName(),movie.getGenre(),movie.getUrlStream()));
+        newMovieEventProducer.publishNewMovieEvent(
+                new NewMovieEventProducer.Data(movie.getName(),movie.getGenre(),movie.getUrlStream()));
         return movieRepository.save(movie);
     }
 }
