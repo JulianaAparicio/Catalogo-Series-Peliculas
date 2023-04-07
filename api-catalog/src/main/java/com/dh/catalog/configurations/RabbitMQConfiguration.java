@@ -1,4 +1,4 @@
-package com.dh.catalog.config;
+package com.dh.catalog.configurations;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -30,8 +30,18 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
-    public Binding declareBindingSpecific(){
+    public Queue queueNewSerie(){
+        return new Queue(QUEUE_NEW_SERIE);
+    }
+
+    @Bean
+    public Binding declareBindingSpecificMovie(){
         return BindingBuilder.bind(queueNewMovie()).to(appExchange()).with(TOPIC_NEW_MOVIE);
+    }
+
+    @Bean
+    public Binding declareBindingSpecificSerie(){
+        return BindingBuilder.bind(queueNewSerie()).to(appExchange()).with(TOPIC_NEW_SERIE);
     }
 
 
