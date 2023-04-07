@@ -31,7 +31,7 @@ public class CatalogService {
         return catalogList;
     }
 
-    // Método Fallback (se ejecuta en caso de que algún microservicio falle):
+    // This Fallback method run if any of the microservices fail:
 
     public List<Object> findByGenreFallBack(String genre){
         return catalogRepository.findAllByGenre(genre);
