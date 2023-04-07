@@ -1,6 +1,6 @@
-package com.dh.catalog.event;
+package com.dh.catalog.events;
 
-import com.dh.catalog.config.RabbitMQConfiguration;
+import com.dh.catalog.configurations.RabbitMQConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NewSerieEventConsumer {
+
     @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_SERIE)
     public void listen(NewSerieEventConsumer.Data message){
         System.out.print("There is a new Serie created: "+ message.serieName);

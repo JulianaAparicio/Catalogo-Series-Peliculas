@@ -13,8 +13,6 @@ public class SerieService {
     private final SerieRepository repository;
     private final NewSerieEventProducer newSerieEventProducer;
 
-
-
     public SerieService(SerieRepository repository, NewSerieEventProducer newSerieEventProducer) {
         this.repository = repository;
         this.newSerieEventProducer = newSerieEventProducer;

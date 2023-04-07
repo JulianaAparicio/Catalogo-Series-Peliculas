@@ -1,14 +1,11 @@
-package com.dh.catalog.client;
+package com.dh.catalog.clients;
 
-import com.dh.catalog.config.LoadBalancerConfiguration;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
+import com.dh.catalog.configurations.LoadBalancerConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +14,6 @@ import java.util.List;
 public interface SerieServiceClient {
 
 	@GetMapping("/api/v1/series/{genre}")
-	@Retry(name = "retryGetSerie")
-	// Ver si cambio lo de clientInscription (ver config del examen):
-	@CircuitBreaker(name = "clientInscription", fallbackMethod = "getSerieFallBack")
 	List<SerieDto> getSeriesByGenre(@PathVariable (value = "genre") String genre);
 
 

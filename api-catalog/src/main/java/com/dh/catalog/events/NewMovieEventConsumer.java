@@ -1,6 +1,6 @@
-package com.dh.catalog.event;
+package com.dh.catalog.events;
 
-import com.dh.catalog.config.RabbitMQConfiguration;
+import com.dh.catalog.configurations.RabbitMQConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NewMovieEventConsumer {
+
     @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_MOVIE)
     public void listen(NewMovieEventConsumer.Data message){
         System.out.print("There is a new Movie created: "+ message.movieName);
     }
-
 
     @AllArgsConstructor
     @NoArgsConstructor

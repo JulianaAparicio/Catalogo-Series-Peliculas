@@ -1,6 +1,6 @@
-package com.dh.catalog.client;
+package com.dh.catalog.clients;
 
-import com.dh.catalog.config.LoadBalancerConfiguration;
+import com.dh.catalog.configurations.LoadBalancerConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
@@ -16,7 +16,6 @@ public interface MovieServiceClient {
 
 	@GetMapping("/api/v1/movies/{genre}")
 	List<MovieDto> getMoviesByGenre(@PathVariable (value = "genre") String genre);
-
 
 	@Getter
 	@Setter

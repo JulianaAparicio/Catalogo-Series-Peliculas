@@ -1,4 +1,4 @@
-package com.dh.catalog.config;
+package com.dh.catalog.configurations;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
