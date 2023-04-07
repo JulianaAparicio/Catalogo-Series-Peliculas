@@ -19,11 +19,14 @@ public class CatalogController {
 		this.catalogService = catalogService;
 	}
 
-	//TODO: AGREGAR 2 ENDPOINTS: QUE DIGA ONLINE Y OFFLINE
-
 	@GetMapping("/online/{genre}")
 	ResponseEntity<List<Object>> getByGenreOnline(@PathVariable String genre) {
 		return ResponseEntity.ok(catalogService.findByGenre(genre));
+	}
+
+	@GetMapping("/offline/{genre}")
+	ResponseEntity<List<Object>> getByGenreOffline(@PathVariable String genre) {
+		return ResponseEntity.ok(catalogService.findByGenreFallBack(genre));
 	}
 
 }
