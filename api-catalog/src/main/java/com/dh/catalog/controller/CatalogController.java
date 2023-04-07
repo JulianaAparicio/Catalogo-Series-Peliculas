@@ -1,8 +1,6 @@
 package com.dh.catalog.controller;
 
-import com.dh.catalog.client.MovieServiceClient;
-
-import com.dh.catalog.client.SerieServiceClient;
+import com.dh.catalog.service.CatalogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,23 +13,17 @@ import java.util.List;
 @RequestMapping("/api/v1/catalog")
 public class CatalogController {
 
-	private final MovieServiceClient movieServiceClient;
-	private final SerieServiceClient serieServiceClient;
+	private final CatalogService catalogService;
 
-	public CatalogController(MovieServiceClient movieServiceClient, SerieServiceClient serieServiceClient) {
-		this.movieServiceClient = movieServiceClient;
-		this.serieServiceClient = serieServiceClient;
+	public CatalogController(CatalogService catalogService) {
+		this.catalogService = catalogService;
 	}
 
+	//TODO: AGREGAR 2 ENDPOINTS: QUE DIGA ONLINE Y OFFLINE
 
-	@GetMapping("/movies/{genre}")
-	ResponseEntity<List<MovieServiceClient.MovieDto>> getMovieGenre(@PathVariable String genre) {
-		return ResponseEntity.ok(movieServiceClient.getMovieByGenre(genre));
-	}
-
-	@GetMapping("/series/{genre}")
-	ResponseEntity<List<SerieServiceClient.SerieDto>> getSerieGenre(@PathVariable String genre) {
-		return ResponseEntity.ok(serieServiceClient.getSerieByGenre(genre));
+	@GetMapping("/online/{genre}")
+	ResponseEntity<List<Object>> getByGenreOnline(@PathVariable String genre) {
+		return ResponseEntity.ok(catalogService.findByGenre(genre));
 	}
 
 }
