@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfiguration {
 
-    public static final String EXCHANGE_NAME = "backendExchange";
-    public static final String TOPIC_NEW_SERIE = "com.dh.backend.newSerie";
+    public static final String EXCHANGE_NAME = "serieExchange";
+    public static final String TOPIC_NEW_SERIE = "com.dh.serie.newSerie";
 
     @Bean
     public TopicExchange appExchange() {
