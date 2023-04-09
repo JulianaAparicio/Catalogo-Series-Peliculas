@@ -1,10 +1,17 @@
 package com.dh.catalog.service;
 
-import com.dh.catalog.client.MovieServiceClient;
-import com.dh.catalog.client.SerieServiceClient;
-import com.dh.catalog.repository.CatalogRepository;
+import com.dh.catalog.clients.MovieServiceClient;
+import com.dh.catalog.clients.SerieServiceClient;
+import com.dh.catalog.events.NewMovieEventConsumer;
+import com.dh.catalog.events.NewSerieEventConsumer;
+import com.dh.catalog.models.Movie;
+import com.dh.catalog.models.Serie;
+import com.dh.catalog.repositories.MovieRepository;
+import com.dh.catalog.repositories.SerieRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,15 +19,24 @@ import java.util.List;
 
 @Service
 public class CatalogService {
-    private final CatalogRepository catalogRepository;
+    private final MovieRepository movieRepository;
+    private final SerieRepository serieRepository;
     private final SerieServiceClient serieServiceClient;
     private final MovieServiceClient movieServiceClient;
+    private final NewMovieEventConsumer newMovieEventConsumer;
+    private final NewSerieEventConsumer newSerieEventConsumer;
+    @Autowired
+    private ObjectMapper mapper;
 
-    public CatalogService(CatalogRepository catalogRepository, SerieServiceClient serieServiceClient, MovieServiceClient movieServiceClient) {
-        this.catalogRepository = catalogRepository;
+    public CatalogService(MovieRepository movieRepository, SerieRepository serieRepository, SerieServiceClient serieServiceClient, MovieServiceClient movieServiceClient, NewMovieEventConsumer newMovieEventConsumer, NewSerieEventConsumer newSerieEventConsumer) {
+        this.movieRepository = movieRepository;
+        this.serieRepository = serieRepository;
         this.serieServiceClient = serieServiceClient;
         this.movieServiceClient = movieServiceClient;
+        this.newMovieEventConsumer = newMovieEventConsumer;
+        this.newSerieEventConsumer = newSerieEventConsumer;
     }
+
 
     @Retry(name = "retryFindByGenre")
     @CircuitBreaker(name = "findByGenre", fallbackMethod = "findByGenreFallBack")
@@ -31,12 +47,29 @@ public class CatalogService {
         return catalogList;
     }
 
-    // This Fallback method run if any of the microservices fail:
+    public void saveMovie(NewMovieEventConsumer.Data data){
+        newMovieEventConsumer.listen(data);
+        Movie movie = mapper.convertValue(data,Movie.class);
+        movieRepository.save(movie);
+    }
 
-    public List<Object> findByGenreFallBack(String genre){
-        return catalogRepository.findAllByGenre(genre);
+    public void saveSerie(NewSerieEventConsumer.Data data){
+        newSerieEventConsumer.listen(data);
+        Serie serie = mapper.convertValue(data,Serie.class);
+        serieRepository.save(serie);
     }
 
 
+    // OFFLINE LOGIC:
+
+    // Agregar 2 métodos que guarden de los  consumidores el almacenamiento de series y peliculas
+
+    // This Fallback method run if any of the microservices fail (its returns the MongoDB data stored):
+    public List<Object> findByGenreFallBack(String genre){
+        List<Object> catalogList = new ArrayList<>();
+        catalogList.add(movieRepository.findAllByGenre(genre));
+        catalogList.add(serieRepository.findAllByGenre(genre));
+        return catalogList;
+    }
 
 }

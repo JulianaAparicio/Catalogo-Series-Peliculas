@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class NewSerieEventConsumer {
 
+
     @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_SERIE)
-    public void listen(NewSerieEventConsumer.Data message){
+    public Data listen(NewSerieEventConsumer.Data message){
         System.out.print("There is a new Serie created: "+ message.serieName);
+        return message;
     }
 
 

@@ -12,8 +12,9 @@ import org.springframework.stereotype.Component;
 public class NewMovieEventConsumer {
 
     @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_MOVIE)
-    public void listen(NewMovieEventConsumer.Data message){
+    public Data listen(Data message){
         System.out.print("There is a new Movie created: "+ message.movieName);
+        return message;
     }
 
     @AllArgsConstructor
