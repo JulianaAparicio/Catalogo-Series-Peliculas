@@ -32,6 +32,7 @@ public class SerieService {
         data.setSerieGenre(serie.getGenre());
         newSerieEventProducer.publishNewSerieEvent(data);
 
+        repository.save(serie);
         return serie.getId();
     }
 }

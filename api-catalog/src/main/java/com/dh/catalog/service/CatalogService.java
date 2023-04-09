@@ -47,6 +47,8 @@ public class CatalogService {
         return catalogList;
     }
 
+    // OFFLINE LOGIC:
+
     public void saveMovie(NewMovieEventConsumer.Data data){
         newMovieEventConsumer.listen(data);
         Movie movie = mapper.convertValue(data,Movie.class);
@@ -59,13 +61,8 @@ public class CatalogService {
         serieRepository.save(serie);
     }
 
-
-    // OFFLINE LOGIC:
-
-    // Agregar 2 métodos que guarden de los  consumidores el almacenamiento de series y peliculas
-
     // This Fallback method run if any of the microservices fail (its returns the MongoDB data stored):
-    public List<Object> findByGenreFallBack(String genre){
+    public List<Object> findByGenreFallBack(String genre, Throwable t) {
         List<Object> catalogList = new ArrayList<>();
         catalogList.add(movieRepository.findAllByGenre(genre));
         catalogList.add(serieRepository.findAllByGenre(genre));

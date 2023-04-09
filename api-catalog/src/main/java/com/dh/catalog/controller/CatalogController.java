@@ -25,8 +25,8 @@ public class CatalogController {
 	}
 
 	@GetMapping("/offline/{genre}")
-	ResponseEntity<List<Object>> getByGenreOffline(@PathVariable String genre) {
-		return ResponseEntity.ok(catalogService.findByGenreFallBack(genre));
+	ResponseEntity<List<Object>> getByGenreOffline(@PathVariable String genre, Throwable t) {
+		return ResponseEntity.ok(catalogService.findByGenreFallBack(genre,t));
 	}
 
 }
