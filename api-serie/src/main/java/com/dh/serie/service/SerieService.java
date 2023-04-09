@@ -27,9 +27,11 @@ public class SerieService {
     }
 
     public String create(Serie serie) {
-        newSerieEventProducer.publishNewSerieEvent(
-                new NewSerieEventProducer.Data(serie.getName(),serie.getGenre()));
-        repository.save(serie);
+        NewSerieEventProducer.Data data = new NewSerieEventProducer.Data();
+        data.setSerieName(serie.getName());
+        data.setSerieGenre(serie.getGenre());
+        newSerieEventProducer.publishNewSerieEvent(data);
+
         return serie.getId();
     }
 }
