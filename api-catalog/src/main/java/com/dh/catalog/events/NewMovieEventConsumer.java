@@ -1,6 +1,6 @@
 package com.dh.catalog.events;
 
-import com.dh.catalog.configurations.RabbitMQMovieConfiguration;
+import com.dh.catalog.configurations.RabbitMQConfiguration;
 import com.dh.catalog.models.Movie;
 import com.dh.catalog.repositories.MovieRepository;
 import lombok.AllArgsConstructor;
@@ -11,16 +11,14 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 @Component
 public class NewMovieEventConsumer {
 
     @Autowired
     MovieRepository movieRepository;
 
-    @RabbitListener(queues = RabbitMQMovieConfiguration.QUEUE_NEW_MOVIE)
-    public void listen(Data message) throws IOException {
+    @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_MOVIE)
+    public void listen(Data message) {
         System.out.print("A new Movie was created: "+ message.movieName);
         Movie movie = new Movie();
         movie.setName(message.getMovieName());

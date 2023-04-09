@@ -1,6 +1,6 @@
 package com.dh.catalog.events;
 
-import com.dh.catalog.configurations.RabbitMQSerieConfiguration;
+import com.dh.catalog.configurations.RabbitMQConfiguration;
 import com.dh.catalog.models.Serie;
 import com.dh.catalog.repositories.SerieRepository;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class NewSerieEventConsumer {
     SerieRepository serieRepository;
 
 
-    @RabbitListener(queues = RabbitMQSerieConfiguration.QUEUE_NEW_SERIE)
+    @RabbitListener(queues = RabbitMQConfiguration.QUEUE_NEW_SERIE)
     public void listen(NewSerieEventConsumer.Data message){
         System.out.print("A new Serie was created: "+ message.serieName);
         Serie serie = new Serie();

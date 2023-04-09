@@ -11,15 +11,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQSerieConfiguration {
-    public static final String EXCHANGE_NAME = "serieExchange";
+public class RabbitMQConfiguration {
+    public static final String EXCHANGE_SERIE_NAME = "serieExchange";
     public static final String TOPIC_NEW_SERIE = "com.dh.serie.newSerie";
     public static final String QUEUE_NEW_SERIE ="queueNewSerie";
+    public static final String EXCHANGE_MOVIE_NAME = "movieExchange";
+    public static final String TOPIC_NEW_MOVIE = "com.dh.movie.newMovie";
+    public static final String QUEUE_NEW_MOVIE ="queueNewMovie";
 
 
     @Bean
-    public TopicExchange appExchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+    public TopicExchange appSerieExchange() {
+        return new TopicExchange(EXCHANGE_SERIE_NAME);
+    }
+
+    @Bean
+    public TopicExchange appMovieExchange() {
+        return new TopicExchange(EXCHANGE_MOVIE_NAME);
     }
 
     @Bean
@@ -28,8 +36,18 @@ public class RabbitMQSerieConfiguration {
     }
 
     @Bean
+    public Queue queueNewMovie(){
+        return new Queue(QUEUE_NEW_MOVIE);
+    }
+
+    @Bean
+    public Binding declareBindingMovie(){
+        return BindingBuilder.bind(queueNewMovie()).to(appMovieExchange()).with(TOPIC_NEW_MOVIE);
+    }
+
+    @Bean
     public Binding declareBindingSerie(){
-        return BindingBuilder.bind(queueNewSerie()).to(appExchange()).with(TOPIC_NEW_SERIE);
+        return BindingBuilder.bind(queueNewSerie()).to(appSerieExchange()).with(TOPIC_NEW_SERIE);
     }
 
 
