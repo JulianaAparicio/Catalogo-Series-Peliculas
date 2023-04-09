@@ -11,11 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfiguration {
-    public static final String EXCHANGE_NAME = "catalogExchange";
-    public static final String TOPIC_NEW_MOVIE = "com.dh.catalog.newMovie";
-    public static final String TOPIC_NEW_SERIE = "com.dh.catalog.newSerie";
-    public static final String QUEUE_NEW_MOVIE ="queueNewMovie";
+public class RabbitMQSerieConfiguration {
+    public static final String EXCHANGE_NAME = "serieExchange";
+    public static final String TOPIC_NEW_SERIE = "com.dh.serie.newSerie";
     public static final String QUEUE_NEW_SERIE ="queueNewSerie";
 
 
@@ -25,28 +23,18 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
-    public Queue queueNewMovie(){
-        return new Queue(QUEUE_NEW_MOVIE);
-    }
-
-    @Bean
     public Queue queueNewSerie(){
         return new Queue(QUEUE_NEW_SERIE);
     }
 
     @Bean
-    public Binding declareBindingSpecificMovie(){
-        return BindingBuilder.bind(queueNewMovie()).to(appExchange()).with(TOPIC_NEW_MOVIE);
-    }
-
-    @Bean
-    public Binding declareBindingSpecificSerie(){
+    public Binding declareBindingSerie(){
         return BindingBuilder.bind(queueNewSerie()).to(appExchange()).with(TOPIC_NEW_SERIE);
     }
 
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final var rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
         return rabbitTemplate;
