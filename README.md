@@ -6,7 +6,7 @@ Se desarrollaron 3 microservicios: Catalogo, Peliculas y Series.
 
 ## Se utilizaron algunos de los siguientes patrones de diseño:
 
-  1) Service registry (eureka-server)
+  	1) Service registry (eureka-server)
   
 	2) Service discovery
   
@@ -18,7 +18,7 @@ Se desarrollaron 3 microservicios: Catalogo, Peliculas y Series.
   
 	6) Circuit Breaker (ResilienceJ4): en caso de producirse una caída de alguno de los microservicios de película o serie, se consume la base de datos de api-catalog para cubrir momentaneamente la caída y mostrarle al usuario la pelicula o serie que se esté consultando.
   
-  7) Edge Server (Spring Cloud Gateway): se accede a través del gateway a toda la aplicación.
+ 	7) Edge Server (Spring Cloud Gateway): se accede a través del gateway a toda la aplicación.
   
   
 ## Otras tecnologías utilizadas:
